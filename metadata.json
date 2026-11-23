@@ -1,0 +1,6 @@
+{
+  "name": "بلدنا - حجازة",
+  "description": "قريتنا في تطبيق واحد.. خدمات أقرب وحياة أسهل — دليل خدمات قرية حجازة",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

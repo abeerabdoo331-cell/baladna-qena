@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E5248" />
+      <stop offset="100%" stop-color="#153B34" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E5B968" />
+      <stop offset="100%" stop-color="#C88E36" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+  <!-- Subtle village sun arc -->
+  <circle cx="256" cy="212" r="96" fill="url(#gold)" opacity="0.22" />
+  <circle cx="256" cy="212" r="56" fill="url(#gold)" />
+  <!-- Stylized arch & village homes silhouette -->
+  <path d="M116 336 L176 266 L236 336 V396 H116 Z" fill="#FAF6F0" />
+  <path d="M214 396 V244 C214 218 232 198 256 198 C280 198 298 218 298 244 V396 Z" fill="#FAF6F0" />
+  <path d="M276 336 L336 266 L396 336 V396 H276 Z" fill="#EFE7DA" />
+  <!-- Palm fronds accent -->
+  <path d="M256 164 C232 126 188 120 162 142 C196 138 228 150 256 164 Z" fill="#9FD3B8" />
+  <path d="M256 164 C280 126 324 120 350 142 C316 138 284 150 256 164 Z" fill="#9FD3B8" />
+  <!-- Doorway -->
+  <path d="M238 396 V332 C238 320 246 312 256 312 C266 312 274 320 274 332 V396 Z" fill="#1E5248" />
+  <!-- Ground horizon -->
+  <rect x="96" y="392" width="320" height="16" rx="8" fill="url(#gold)" />
+</svg>

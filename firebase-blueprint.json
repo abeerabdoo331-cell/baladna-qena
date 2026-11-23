@@ -1,0 +1,494 @@
+{
+  "entities": {
+    "Category": {
+      "title": "Category",
+      "description": "Main category or internal subcategory in Baladna Qena managed exclusively by admins.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Slug identifier for the category",
+          "minLength": 2,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "parentId": {
+          "type": "string",
+          "description": "Parent main category ID (empty string for main categories)",
+          "maxLength": 64
+        },
+        "name": {
+          "type": "string",
+          "description": "Arabic display name of the category",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "description": {
+          "type": "string",
+          "description": "Short Arabic description of services in this category",
+          "maxLength": 160
+        },
+        "iconKey": {
+          "type": "string",
+          "description": "Vector icon key for the category card",
+          "enum": ["medical", "education", "crafts", "market", "shop", "transport", "home", "jobs", "ads", "delivery", "aid", "services", "health", "general"]
+        },
+        "accentColor": {
+          "type": "string",
+          "description": "Hex accent color for the category card",
+          "minLength": 7,
+          "maxLength": 7,
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "order": {
+          "type": "integer",
+          "description": "Display order index in the category grid"
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Whether the category is visible"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation server timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update server timestamp"
+        }
+      },
+      "required": ["id", "parentId", "name", "description", "iconKey", "accentColor", "order", "isActive", "createdAt", "updatedAt"]
+    },
+    "Center": {
+      "title": "Center",
+      "description": "Administrative center (Markaz) in Qena Governorate.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Slug ID for the Qena center",
+          "minLength": 2,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Arabic name of the center in Qena",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "order": {
+          "type": "integer",
+          "description": "Display sort order"
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Whether the center is active for selection"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation server timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Update server timestamp"
+        }
+      },
+      "required": ["id", "name", "order", "isActive", "createdAt", "updatedAt"]
+    },
+    "Village": {
+      "title": "Village",
+      "description": "Village or city in Qena Governorate linked to a Center.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Slug ID for the village or city",
+          "minLength": 2,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "centerId": {
+          "type": "string",
+          "description": "Reference to the parent Center ID",
+          "minLength": 2,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Arabic name of the village or city",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "order": {
+          "type": "integer",
+          "description": "Display sort order within the center"
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Whether the village is active for selection"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation server timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Update server timestamp"
+        }
+      },
+      "required": ["id", "centerId", "name", "order", "isActive", "createdAt", "updatedAt"]
+    },
+    "Listing": {
+      "title": "Listing",
+      "description": "Service directory entry, market ad, job post, transport service, or charitable aid listing in Qena.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Ad title, provider name, or job title",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "Specific service type, specialty, or ad type",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "listingKind": {
+          "type": "string",
+          "description": "Type of entry",
+          "enum": ["ad", "service", "job", "aid"]
+        },
+        "contactPhone": {
+          "type": "string",
+          "description": "Phone/WhatsApp number (empty when hideContactInfo is true)",
+          "maxLength": 20
+        },
+        "hideContactInfo": {
+          "type": "boolean",
+          "description": "Privacy guard for Aid listings to avoid publishing personal phone without consent"
+        },
+        "centerId": {
+          "type": "string",
+          "description": "Qena Center ID",
+          "maxLength": 64
+        },
+        "centerName": {
+          "type": "string",
+          "description": "Qena Center display name",
+          "maxLength": 60
+        },
+        "villageId": {
+          "type": "string",
+          "description": "Qena Village or City ID",
+          "maxLength": 64
+        },
+        "villageName": {
+          "type": "string",
+          "description": "Qena Village or City display name",
+          "maxLength": 60
+        },
+        "area": {
+          "type": "string",
+          "description": "Detailed street or landmark inside the village/city",
+          "maxLength": 80
+        },
+        "notes": {
+          "type": "string",
+          "description": "Full ad or service description",
+          "maxLength": 600
+        },
+        "price": {
+          "type": "string",
+          "description": "Optional price or service fee defined by the owner",
+          "maxLength": 60
+        },
+        "images": {
+          "type": "array",
+          "description": "Up to 3 compressed image URLs/data-URLs"
+        },
+        "categoryId": {
+          "type": "string",
+          "description": "Reference to the parent main category ID",
+          "minLength": 2,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "subcategoryId": {
+          "type": "string",
+          "description": "Optional reference to an internal subcategory ID",
+          "maxLength": 64
+        },
+        "submittedByName": {
+          "type": "string",
+          "description": "Display name of the listing owner",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "authorUid": {
+          "type": "string",
+          "description": "Firebase Auth UID of the creator",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "status": {
+          "type": "string",
+          "description": "Moderation status of the listing",
+          "enum": ["pending", "approved", "rejected"]
+        },
+        "isFeatured": {
+          "type": "boolean",
+          "description": "Whether the listing is featured by admin on the home page"
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Whether the listing is currently enabled (admin can pause/resume)"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation server timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update server timestamp"
+        }
+      },
+      "required": [
+        "title", "serviceType", "listingKind", "contactPhone", "hideContactInfo",
+        "centerId", "centerName", "villageId", "villageName", "area", "notes",
+        "price", "images", "categoryId", "subcategoryId", "submittedByName",
+        "authorUid", "status", "isFeatured", "isActive", "createdAt", "updatedAt"
+      ]
+    },
+    "AidContact": {
+      "title": "AidContact",
+      "description": "Private contact info for Aid requests that opted not to expose personal contact publicly.",
+      "type": "object",
+      "properties": {
+        "listingId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "authorUid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "contactPhone": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 20,
+          "pattern": "^[0-9+\\-\\s()]{6,20}$"
+        },
+        "requesterName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["listingId", "authorUid", "contactPhone", "requesterName", "createdAt"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Governorate-wide or center-specific news and alerts published by admins.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100
+        },
+        "body": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 600
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["normal", "important"]
+        },
+        "centerName": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["title", "body", "priority", "centerName", "isActive", "createdAt", "updatedAt"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Registered Qena user profile managed by owner and admin (PII isolated).",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 60
+        },
+        "phone": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "centerId": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "villageId": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "favorites": {
+          "type": "array",
+          "description": "Up to 50 saved listing IDs"
+        },
+        "isBlocked": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "displayName", "phone", "email", "centerId", "villageId", "favorites", "isBlocked", "createdAt", "updatedAt"]
+    },
+    "AppUpdate": {
+      "title": "AppUpdate",
+      "description": "APK release announcement and download link published by admins.",
+      "type": "object",
+      "properties": {
+        "versionName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "versionCode": {
+          "type": "integer"
+        },
+        "releaseNotes": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 1000
+        },
+        "apkUrl": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["versionName", "versionCode", "releaseNotes", "apkUrl", "isActive", "createdAt", "updatedAt"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized Baladna administrator record.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 120
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["email", "displayName", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/Category" },
+      "description": "Main categories and internal subcategories managed exclusively by administrators."
+    },
+    "/centers/{centerId}": {
+      "schema": { "$ref": "#/entities/Center" },
+      "description": "Centers (Marakez) of Qena Governorate managed by administrators."
+    },
+    "/villages/{villageId}": {
+      "schema": { "$ref": "#/entities/Village" },
+      "description": "Villages and cities linked to Qena centers, managed by administrators."
+    },
+    "/listings/{listingId}": {
+      "schema": { "$ref": "#/entities/Listing" },
+      "description": "Qena services, ads, jobs, transport, and charitable aid entries."
+    },
+    "/aid_contacts/{listingId}": {
+      "schema": { "$ref": "#/entities/AidContact" },
+      "description": "Private contact details for Aid requests that disabled public contact display."
+    },
+    "/announcements/{announcementId}": {
+      "schema": { "$ref": "#/entities/Announcement" },
+      "description": "News and alerts for Qena residents published by administrators."
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "PII-isolated user profiles and favorites."
+    },
+    "/app_updates/{updateId}": {
+      "schema": { "$ref": "#/entities/AppUpdate" },
+      "description": "APK release notes and update links published by administrators."
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "Administrator registry for role verification."
+    }
+  }
+}

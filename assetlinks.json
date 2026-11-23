@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "studio.ai.baladna_hejaza.twa",
+      "sha256_cert_fingerprints": [
+        "66:CB:96:6C:EC:12:8B:CE:78:BA:B5:DC:ED:2A:6E:1C:30:2F:35:29:FE:76:77:9E:B4:E2:E7:E9:01:CA:41:6F"
+      ]
+    }
+  }
+]
